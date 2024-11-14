@@ -8,6 +8,8 @@ import { useTranslation } from "react-i18next";
 
 const RoomCard = ({ userId, name, image, sleeps, bed, price, left, checkInDateVal, checkOutDateVal, updateCartCount, detailsRoom }) => {
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  
   const [bookingData, setBookingData] = useState({
     userId: userId,
     checkInDate: checkInDateVal,
@@ -75,7 +77,7 @@ const RoomCard = ({ userId, name, image, sleeps, bed, price, left, checkInDateVa
 
     try {
       // ส่งข้อมูลการจองไปยัง Backend
-      const response = await axios.post('http://localhost:5000/api/book', bookingData);
+      const response = await axios.post(`${backendUrl}/api/book`, bookingData);
       console.log('Booking Success:', response.data);
       // ทำอะไรเพิ่มเติมหลังจากจองห้องสำเร็จ เช่น ปิด Modal หรือแสดงข้อความสำเร็จ
       updateCartCount((prevCount) => prevCount + 1); // เพิ่มจำนวนการจองในตะกร้า

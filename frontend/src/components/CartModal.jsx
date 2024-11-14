@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next';
 const CartModal = ({ isOpen, closeModal, updateCartCount }) => {
   if (!isOpen) return null; // ถ้า Modal ไม่เปิดก็ไม่แสดงอะไร
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,7 +38,7 @@ const CartModal = ({ isOpen, closeModal, updateCartCount }) => {
 
         // ตรวจสอบว่ามี userId อยู่ก่อนที่จะเรียกใช้ API
         if (userId) {
-          const response = await axios.get(`http://localhost:5000/api/cart/${userId}`);
+          const response = await axios.get(`${backendUrl}/api/cart/${userId}`);
           setCart(response.data.bookings); // เก็บข้อมูลการจองของผู้ใช้ใน state
           updateCartCount(response.data.bookings.length);
         } else {
@@ -71,7 +73,7 @@ const CartModal = ({ isOpen, closeModal, updateCartCount }) => {
       const storedUser = JSON.parse(localStorage.getItem('user'));
       const userId = storedUser?._id;
 
-      await axios.delete(`http://localhost:5000/api/${userId}/cart/${bookingId}`);
+      await axios.delete(`${backendUrl}/api/${userId}/cart/${bookingId}`);
       setCart(cart.filter((booking) => booking._id !== bookingId));
       updateCartCount(cart.length - 1); // อัปเดตจำนวนรายการใหม่
     } catch (error) {
@@ -94,7 +96,7 @@ const CartModal = ({ isOpen, closeModal, updateCartCount }) => {
       const storedUser = JSON.parse(localStorage.getItem('user'));
       const userId = storedUser?._id;
 
-      const response = await axios.post(`http://localhost:5000/api/generate-booking-id/${userId}`);
+      const response = await axios.post(`${backendUrl}/api/generate-booking-id/${userId}`);
       const bookingID = response.data;
 
       console.log(bookingID)

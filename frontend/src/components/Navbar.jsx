@@ -18,6 +18,8 @@ const Navbar = () => {
   const [isCartModalOpen, setCartModalOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const updateCartCount = (newCount) => {
     setCartCount(newCount);
   }; 
@@ -37,7 +39,7 @@ const Navbar = () => {
         const storedUser = JSON.parse(localStorage.getItem('user'));
         if (storedUser) {
           const userId = storedUser._id;
-          const response = await axios.get(`http://localhost:5000/api/cart/${userId}`);
+          const response = await axios.get(`${backendUrl}/api/cart/${userId}`);
           setCartCount(response.data.bookings.length); // อัปเดตจำนวนการจองในตะกร้า
         }
       } catch (error) {

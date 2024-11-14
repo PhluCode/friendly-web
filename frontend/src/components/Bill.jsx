@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { useTranslation } from 'react-i18next';
 
 const Bill = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [user, setUser] = useState(null);
   const navigate = useNavigate();  // สร้าง instance ของ useNavigate
 
@@ -16,7 +17,7 @@ const Bill = () => {
       try {
         const storedUser = JSON.parse(localStorage.getItem('user'));
         const userId = storedUser?._id;
-        const response = await axios.get(`http://localhost:5000/api/user/${userId}`);
+        const response = await axios.get(`${backendUrl}/api/user/${userId}`);
         setUser(response.data);
 
         console.log(response.data)
@@ -50,16 +51,16 @@ const Bill = () => {
       const userId = storedUser?._id;
 
       await Promise.all(user.bookings.map((booking) => 
-        axios.delete(`http://localhost:5000/api/${userId}/cart/${booking._id}`)
+        axios.delete(`${backendUrl}/api/${userId}/cart/${booking._id}`)
       ));
 
       navigate('/'); // ไปที่หน้า Home
 
-      const response = await axios.post('http://localhost:5000/api/bookings/create', bookingData);
+      const response = await axios.post(`${backendUrl}/api/bookings/create`, bookingData);
       console.log('Booking saved:', response.data);
 
       await Promise.all(user.bookings.map(async (booking) => {
-        await axios.patch(`http://localhost:5000/api/rooms/decrement/${booking.roomType}`, {
+        await axios.patch(`${backendUrl}/api/rooms/decrement/${booking.roomType}`, {
           decrement: 1
         });
       }))

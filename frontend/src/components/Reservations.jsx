@@ -6,9 +6,11 @@ function Reservations() {
   const [reservationList, setReservationList] = useState([]);
   const [searchError, setSearchError] = useState("");
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const fetchAllBookings = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/bookings/all");
+      const response = await axios.get(`${backendUrl}/api/bookings/all`);
       setReservationList(response.data);
       setSearchError("");
     } catch (error) {
@@ -28,7 +30,7 @@ function Reservations() {
     }; // ถ้าไม่มี ID ในการค้นหา ให้ยุติฟังก์ชัน
 
     try {
-      const response = await axios.get(`http://localhost:5000/api/bookings/find/${bookingId}`);
+      const response = await axios.get(`${backendUrl}/api/bookings/find/${bookingId}`);
       setReservationList([response.data]); // แสดงผลการค้นหาที่พบ
       setSearchError(""); // ล้างข้อความผิดพลาดถ้าเจอผลการค้นหา
     } catch (error) {
@@ -39,7 +41,7 @@ function Reservations() {
 
   const handleStatusChange = async (reservationId, newStatus) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/bookings/update/${reservationId}`, { status: newStatus });
+      await axios.put(`${backendUrl}/api/bookings/update/${reservationId}`, { status: newStatus });
       setReservationList((prevList) =>
         prevList.map((reservation) =>
           reservation._id === reservationId ? { ...reservation, status: newStatus } : reservation

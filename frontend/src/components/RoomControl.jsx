@@ -6,10 +6,14 @@ function Room() {
   const [rooms, setRooms] = useState([]);
   const [updatedRooms, setUpdatedRooms] = useState({});
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+  console.log(backendUrl)
+
   // ดึงข้อมูลห้องพักทั้งหมดจาก API
   const fetchRooms = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/rooms");
+      const response = await axios.get(`${backendUrl}/api/rooms`);
       setRooms(response.data);
     } catch (error) {
       console.error("Error fetching rooms:", error);
@@ -37,7 +41,7 @@ function Room() {
       const updatedData = updatedRooms[roomId];
       if (!updatedData) return; // ไม่มีการเปลี่ยนแปลงข้อมูล
 
-      await axios.put(`http://localhost:5000/api/rooms/update/${roomId}`, updatedData);
+      await axios.put(`${backendUrl}/api/rooms/update/${roomId}`, updatedData);
       fetchRooms(); // รีเฟรชข้อมูลห้องหลังจากการอัปเดต
 
       Swal.fire({

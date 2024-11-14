@@ -11,12 +11,14 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();  // สร้าง instance ของ useNavigate
 
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
     const handleRegister = async (e) => {
         e.preventDefault();
 
         try {
           // ส่งคำขอ POST ไปยัง API สำหรับการสมัครสมาชิก
-          const response = await axios.post('http://localhost:5000/api/auth/register', {
+          const response = await axios.post(`${backendUrl}/api/auth/register`, {
             name,
             email,
             password,

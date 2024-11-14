@@ -13,9 +13,11 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
     try {
       // ส่งคำขอ POST ไปยัง API สำหรับการเข้าสู่ระบบ
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post(`${backendUrl}/api/auth/login`, {
         email,
         password,
       });

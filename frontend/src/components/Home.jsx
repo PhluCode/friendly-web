@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next';
 
 function Home({ updateCartCount }) {
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [checkinDate, setCheckinDate] = useState("");
   const [checkoutDate, setCheckoutDate] = useState("");
 
@@ -19,7 +21,7 @@ function Home({ updateCartCount }) {
     // ดึงข้อมูลห้องพักจาก API
     const fetchRooms = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/rooms');
+        const response = await axios.get(`${backendUrl}/api/rooms`);
         setRooms(response.data); // เก็บข้อมูลห้องพักใน state
         setLoading(false);
       } catch (error) {
