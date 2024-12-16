@@ -60,7 +60,7 @@ const Bill = () => {
       console.log('Booking saved:', response.data);
 
       await Promise.all(user.bookings.map(async (booking) => {
-        await axios.patch(`${backendUrl}/api/rooms/decrement/${booking.roomType}`, {
+        await axios.patch(`${backendUrl}/api/rooms/decrement/${booking.roomId}`, {
           decrement: 1
         });
       }))

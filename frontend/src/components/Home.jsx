@@ -120,6 +120,7 @@ function Home({ updateCartCount }) {
             checkOutDateVal={checkoutDate}
             updateCartCount={updateCartCount} // ส่งฟังก์ชันนี้ไปที่ RoomCard
             detailsRoom={room.details}
+            roomIdd={room._id}
           />
         ))}
       </div>

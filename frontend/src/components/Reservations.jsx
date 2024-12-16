@@ -95,7 +95,7 @@ function Reservations() {
                 <th className="px-4 py-2 border">Check-out</th>
                 <th className="px-4 py-2 border w-[250px]">Room type</th>
                 <th className="px-4 py-2 border">Booking date</th>
-                <th className="px-4 py-2 border">Reservation</th>
+                <th className="px-4 py-2 border">Reservation ID</th>
                 <th className="px-4 py-2 border">Payment</th>
                 <th className="px-4 py-2 border">Status</th>
               </tr>

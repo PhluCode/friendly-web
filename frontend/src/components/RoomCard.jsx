@@ -6,7 +6,7 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 import { useTranslation } from "react-i18next";
 
-const RoomCard = ({ userId, name, image, sleeps, bed, price, left, checkInDateVal, checkOutDateVal, updateCartCount, detailsRoom }) => {
+const RoomCard = ({ userId, name, image, sleeps, bed, price, left, checkInDateVal, checkOutDateVal, updateCartCount, detailsRoom, roomIdd }) => {
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   
@@ -17,6 +17,7 @@ const RoomCard = ({ userId, name, image, sleeps, bed, price, left, checkInDateVa
     bookDate: new Date().toISOString().split('T')[0],
     nightCount: 0,
     roomCount: 1,
+    roomId: roomIdd,
     roomType: name,
     bedCount: bed,
     guestCount: sleeps,

@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     bookDate: { type: Date, required: true },
     nightCount: { type: Number, required: true },
     roomCount: { type: Number, required: true },
+    roomId: { type: String, required: true},
     roomType: { type: String, required: true },
     bedCount: { type: String, required: true },
     guestCount: { type: Number, required: true },

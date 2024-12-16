@@ -8,7 +8,6 @@ const roomRoutes = require('./routes/roomRoutes');
 const userRoutes = require('./routes/userRoutes');
 const bookingConfirmRoute = require('./routes/bookingConfirm');
 
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -21,12 +20,12 @@ app.use(cors());
 app.use(express.json()); // Middleware สำหรับรับข้อมูล JSON
 app.use(express.static('roompic'));
 app.use('/api', bookingRoutes); // ใช้ route ที่สร้างสำหรับการจอง
-app.use('/api/auth', authRoutes);
-app.use('/api', roomRoutes);
+app.use('/api/auth', authRoutes); // ล็อกอิน
+app.use('/api', roomRoutes); 
 app.use('/api', userRoutes);
 app.use('/api/bookings', bookingConfirmRoute);
 
-// เริ่มต้นเซิร์ฟเวอร์เพียงครั้งเดียว
+// เริ่มต้นเซิฟเวอร์
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
  
