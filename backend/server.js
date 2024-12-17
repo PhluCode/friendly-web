@@ -19,12 +19,12 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use(cors());
 
-// เสิร์ฟไฟล์ Static
-app.use(express.static(path.join(__dirname, 'build')));
+// ให้ Express ให้บริการไฟล์ static ของ frontend จากโฟลเดอร์ dist
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-// Catch-All Route เพื่อส่ง index.html
+// ทุกเส้นทางที่ไม่ตรงกับ API จะให้ React Router จัดการ (ส่ง index.html)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
 
 app.use(express.json()); // Middleware สำหรับรับข้อมูล JSON
