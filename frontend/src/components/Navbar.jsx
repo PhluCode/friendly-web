@@ -105,10 +105,14 @@ const Navbar = () => {
           {/* Cart Icon */}
           <div className="relative flex">
           {user && user.role === 'admin' ? (
-            <button onClick={() => window.open('/admin-control/reservations', '_blank')} className='hidden md:flex items-center bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md'>
-              <MdManageSearch className='mr-2'/>
+            <Link
+              to="/admin-control/reservations"
+              target="_blank"
+              className="hidden md:flex items-center bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
+            >
+              <MdManageSearch className="mr-2" />
               <p>ADMIN CONTROL</p>
-            </button>
+            </Link>
           ) : null}
             <button onClick={openCartModal} className="ml-4 text-xl mr-4">
               <FaShoppingCart /> 
