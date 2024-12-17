@@ -92,7 +92,7 @@ const RoomCard = ({ userId, name, image, sleeps, bed, price, left, checkInDateVa
       {/* Image Section */}
       <div className="relative">
         <img
-          src={`http://localhost:5000${image}`}
+          src={`${backendUrl}${image}`}
           alt="Room Picture"
           className="w-full h-48 object-cover"
         />
